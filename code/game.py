@@ -233,17 +233,32 @@ class Game:
                 hands[i].append(self.deck.drawCards(1)[0])
 
         for i in range(self.noOfPlayers):
-            hands[i] = frozenset([item.getShorthand() for item in hands[i]])
+            hands[i] = frozenset([item.getShorthand() for item in hands[i]]) 
 
         return hands
 
-    def simulateGame(self) -> dict:
-        """Simulates the running of the game
+    def getHands(self) -> list:
+        """Get the hands dealt to the players
+
+        Returns
+        -------
+        list
+            Hands dealt
+        """
+        return self.hands
+
+    def simulateGame(self, saveResults: bool = False) -> dict:
+        """Simulates the running of a single game
+
+        Parameters
+        ----------
+        saveResults : bool, optional
+            Whether results need to be saved, by default False
 
         Returns
         -------
         dict
-            Dictionary with the hands in the game, and the results
+            Results for the hands dealt
         """
         results = {item:np.array([0,0,1]) for item in self.hands}
         ranks = np.array([Game.HAND_RANKINGS[hand] for hand in self.hands])
@@ -256,6 +271,18 @@ class Game:
             tie=1
         for item in minIndices:
             results[self.hands[item]]=np.array([win,tie,1])
+        if saveResults:
+            self.results = results
         return results
+
+    def printResults(self):
+        for key,value in self.results.items():
+            if value[0]==1:
+                print(f"{list(key)}: win")
+            elif value[1]==1:
+                print(f"{list(key)}: tie")
+            else:
+                print(f"{list(key)}: lose")
+
 
 
