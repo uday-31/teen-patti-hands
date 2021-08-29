@@ -1,6 +1,7 @@
 import random
 
 class Card:
+    """ Defines a card that is used in the game """
 
     SUIT_MAP = {
         'D': 'Diamonds',
@@ -43,27 +44,37 @@ class Card:
     }
 
     def __init__(self, suit: str, rank: str):
+        """Initialize the card
+
+        Parameters
+        ----------
+        suit : str
+            Suit of the card
+        rank : str
+            Rank of the card
+        """
         self.suit = suit
         self.color = Card.SUIT_COLOR_MAP[suit]
         self.rank = rank
 
-    def getSuit(self) -> str:
-        return self.suit
-
-    def getColor(self) -> str:
-        return self.color
-
-    def getRank(self) -> str:
-        return self.rank
-
     def printCard(self):
+        """Prints the full name of the card
+        """
         name = Card.RANK_MAP[self.rank] + " of " + Card.SUIT_MAP[self.suit]
         print(name)
 
-    def getShorthand(self):
+    def getShorthand(self) -> str:
+        """Get the shorthand name of the card
+
+        Returns
+        -------
+        str
+            Shorthand name of the card
+        """
         return self.rank + self.suit
 
 class Deck:
+    """This class defines a deck that is used in the game """
 
     SUITS = ['S', 'H', 'D', 'C']
     
@@ -86,6 +97,7 @@ class Deck:
     COLORS = ['R','B']
 
     def __init__(self):
+        """Initialize a deck of 52 cards """
         deck = list()
         for rank in Deck.RANKS:
             for suit in Deck.SUITS:
@@ -93,10 +105,29 @@ class Deck:
         self.deck = deck
         self.size = len(deck)
 
-    def getDeck(self):
+    def getDeck(self) -> list:
+        """Returns the current deck
+
+        Returns
+        -------
+        list
+            list of objects of type Card
+        """
         return self.deck
 
     def drawCards(self, numberOfDraws: int = 1) -> list:
+        """Draw a given number of cards from the top of the deck
+
+        Parameters
+        ----------
+        numberOfDraws : int, optional
+            Number of cards to be drawn, by default 1
+
+        Returns
+        -------
+        list
+            List of cards drawn, of type Card
+        """
 
         assert self.size >= numberOfDraws, "Deck doesn't have enough cards!"
 
@@ -108,4 +139,6 @@ class Deck:
         return cardsDrawn
 
     def shuffleDeck(self):
+        """Shuffle the deck
+        """
         random.shuffle(self.deck)

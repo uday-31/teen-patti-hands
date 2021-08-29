@@ -1,9 +1,10 @@
-from cards import Deck
+from .cards import Deck
 import numpy as np
 import itertools
 import random
 
-def getHandRankings():    
+def getHandRankings() -> tuple: 
+    """ Returns the rankings of each possible hand, and the respective names """ 
     rankings = {}
     
     names = {}
@@ -194,16 +195,37 @@ class Game:
     HAND_RANKINGS, HAND_NAMES = getHandRankings()
 
     def __init__(self, noOfPlayers: int, jokers: list = None, handSize: int = 3):
+        """Initialize a Teen Patti game
+
+        Parameters
+        ----------
+        noOfPlayers : int
+            Number of players in the game
+        jokers : list, optional
+            Yet to be implemented, list of jokers, by default None
+        handSize : int, optional
+            Size of the hand of each player, by default 3
+        """
         self.noOfPlayers = noOfPlayers
         self.deck = Deck()
         self.jokers = jokers
         self.handSize = handSize
         self.hands = self.generateHands()
 
-    def generateHands(self):
+    def generateHands(self) -> list:
+        """Generate the hands of each player like is done in the real game
+
+        Returns
+        -------
+        list
+            List of hands, each hand is a list of strings representing cards
+        """
+
+        # Shuffle the deck
         self.deck.shuffleDeck()
         hands = []
-        handsShorthand = []
+
+        # Draw cards to each player one by one till all of them get 3
         for _ in range(self.noOfPlayers):
             hands.append([])
         for _ in range(self.handSize):
@@ -215,7 +237,14 @@ class Game:
 
         return hands
 
-    def simulateGame(self):
+    def simulateGame(self) -> dict:
+        """Simulates the running of the game
+
+        Returns
+        -------
+        dict
+            Dictionary with the hands in the game, and the results
+        """
         results = {item:np.array([0,0,1]) for item in self.hands}
         ranks = np.array([Game.HAND_RANKINGS[hand] for hand in self.hands])
         minIndices = np.where(ranks == ranks.min())[0]
