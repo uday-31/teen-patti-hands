@@ -36,4 +36,45 @@ print("Size of deck:",deck.size)
 ```
 
 ## Simulating games
-Simulations for a game 
+Simulations for a game can be run using the Game class in code/game.py.
+
+```python
+# Creating a game of 5 players and generating hands
+game = Game(5)
+
+# Simulate a single game
+results = game.simulateGame(saveResults=True)
+game.printResults()
+```
+
+## Running Monte Carlo simulations
+Functions from simulation.py can be used to run simulations, and manipulate the results.
+
+```python
+# Running 1000000 simulations for a game of 5 players
+sim = runSimulations(5, 1000000)
+
+# Adding 500000 simulations to the previous results
+sim = runSimulations(5, 500000, append = sim)
+```
+
+```python
+# Saving the dictionary with results
+saveRaw(sim, 5)
+
+# Loading the dictionary
+sim = loadRaw(5)
+```
+
+```python
+# Cleaning the dictionary and converting it to a DataFrame
+sim_cleaned = clean(sim, 5)
+
+# Saving the cleaned DataFrame
+saveCleaned(sim_cleaned, 5)
+```
+
+```python
+# Retrieving the number of simulations run for games with 5 players
+simulationsRun(5)
+```
