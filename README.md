@@ -83,6 +83,4 @@ simulationsRun(5)
 ```
 
 # Results
-Simulation results are found in the results folder.
-
-The CSV files are named according to the number of players in the game for which the simulations were run.
+Simulation results are found in the results folder. The CSV files are named according to the number of players in the game for which the simulations were run.
