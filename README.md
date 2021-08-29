@@ -58,6 +58,7 @@ sim = runSimulations(5, 1000000)
 sim = runSimulations(5, 500000, append = sim)
 ```
 
+Saving and loading the raw dictionary file:
 ```python
 # Saving the dictionary with results
 saveRaw(sim, 5)
@@ -66,6 +67,7 @@ saveRaw(sim, 5)
 sim = loadRaw(5)
 ```
 
+Cleaning the raw dictionary and converting it to a DataFrame:
 ```python
 # Cleaning the dictionary and converting it to a DataFrame
 sim_cleaned = clean(sim, 5)
@@ -74,7 +76,13 @@ sim_cleaned = clean(sim, 5)
 saveCleaned(sim_cleaned, 5)
 ```
 
+Retrieving the number of simulations run:
 ```python
 # Retrieving the number of simulations run for games with 5 players
 simulationsRun(5)
 ```
+
+# Results
+Simulation results are found in the results folder.
+
+The CSV files are named according to the number of players in the game for which the simulations were run.
