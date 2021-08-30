@@ -101,7 +101,7 @@ def getHandRankings() -> tuple:
         
         for hand in cards:
             rankings[frozenset(hand)] = rank
-            names[hand] = ranksInv[item]+'-'+ranksInv[item-1]+'-'+ranksInv[item-2]+" straight flush"
+            names[hand] = ranksInv[item]+'-'+ranksInv[item-1]+'-'+ranksInv[item-2]+" straight"
             existingHands.add(frozenset(hand))
         rank+=1
 
